@@ -35,6 +35,7 @@
     font-size: 3rem;
     font-weight: bold;
     border: 3px solid black;
+    user-select: none;
 }
 
 .message {

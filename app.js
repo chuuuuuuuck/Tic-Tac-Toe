@@ -22,6 +22,12 @@ $(document).ready(function () {
     }
 
     function checkWin() {
+        let end = true;
+        for (let i = 0; i < board.length;i++) {
+            if (board[i] == "") end = false;
+        }
+        if (end == true) game_over = "Tie";
+
         for(let i = 0;i < winningConditions.length;i++) {
             let cond = winningConditions[i];
 
@@ -35,12 +41,6 @@ $(document).ready(function () {
                 game_over = turn+" Wins!";
             }
         }
-        
-        let end = true;
-        for (let i = 0; i < board.length;i++) {
-            if (board[i] == "") end = false;
-        }
-        if (end == true) game_over = "Tie";
 
         $(".message").text(game_over);
     }
