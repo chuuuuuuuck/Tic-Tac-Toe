@@ -1,7 +1,9 @@
 $(document).ready(function () {
     let turn = "X";
-    const board = ["","","","","","","","",""];
+    let board = ["","","","","","","","",""];
     const tiles = $(".tile").toArray();
+
+    let game_over = "";
 
     winningConditions = [
         [0,1,2],
@@ -21,28 +23,44 @@ $(document).ready(function () {
 
     function checkWin() {
         for(let i = 0;i < winningConditions.length;i++) {
-            let c = winningConditions[i];
+            let cond = winningConditions[i];
 
-            let a = c[0];
-            let b = c[1];
-            let c = c[2];
+            let a = board[cond[0]];
+            let b = board[cond[1]];
+            let c = board[cond[2]];
 
-            if board[a] == board[b] && board[b] == board[c] {
-                return TextTrackCueList;
+            if (a == "" && b == "" && c == "") continue;
+
+            if  (a == b && b == c) {
+                game_over = turn+" Wins!";
             }
         }
-        return false;
+        
+        let end = true;
+        for (let i = 0; i < board.length;i++) {
+            if (board[i] == "") end = false;
+        }
+        if (end == true) game_over = "Tie";
+
+        $(".message").text(game_over);
     }
     
+    $("button").click(function(){
+        game_over = "";
+        turn = "X";
+        board = ["","","","","","","","",""];
+        $(".tile").text("");
+        $(".message").text("");
+    })
 
     $(".tile").click(function(){
-        if (this.innerHTML == "") {
+        if (this.innerHTML == "" && game_over == "") {
             this.innerHTML = turn;
-            board[index] = turn;
-            if checkWin() {
+            board[this.value] = turn;
 
-            }
-            else {
+            checkWin();
+
+            if (game_over == "") {
                 if (turn == "X") turn = "O";
                 else turn = "X";
             }
