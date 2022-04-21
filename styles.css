@@ -36,3 +36,15 @@
     font-weight: bold;
     border: 3px solid black;
 }
+
+.message {
+    text-align: center;
+    padding-top: 10px;
+    font-size: 25px;
+}
+
+button {
+    margin-top: 10px;
+    padding:5px;
+    font-size: 25px;
+}
